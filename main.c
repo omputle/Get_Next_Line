@@ -18,11 +18,3 @@ int		main(void)
 	}
 	return (0);
 }
-
-
-/*int		main(void)
-{
-	ft_putnbr(ft_strlen("Orapeleng"));
-	return (0);
-}
-*/

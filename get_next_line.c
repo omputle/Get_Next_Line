@@ -6,7 +6,7 @@
 /*   By: omputle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 14:56:21 by omputle           #+#    #+#             */
-/*   Updated: 2019/07/03 17:27:37 by omputle          ###   ########.fr       */
+/*   Updated: 2019/07/04 10:53:20 by omputle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -25,7 +25,7 @@ static	char	*read_line(int fd, char *s)
 	int		num;
 	char	buff[BUFF_SIZE + 1];
 
-	while ((num = read(fd, buff, BUFF_SIZE)) > 0)
+	while (((num = read(fd, buff, BUFF_SIZE)) > 0) && buff[0] != '\n')
 	{
 		buff[num] = '\0';
 		s = ft_strappend(s,  buff);
@@ -35,7 +35,7 @@ static	char	*read_line(int fd, char *s)
 	return (s);
 }
 
-static char	*ft_this(char *s, char **line)
+static char	*new_line(char *s, char **line)
 {
 	char	*temp;
 	int		count;
@@ -56,18 +56,18 @@ static char	*ft_this(char *s, char **line)
 
 int	get_next_line(const int fd, char **line)
 {
-	static char	*s[1024];
+	static char	*s;
 	int		num;
 	char	buf[BUFF_SIZE + 1];
 
-	if (!(*line) || fd < 0 || (read(fd, buf, 0) == -1))
+	if (!(*line) || fd < 0)
 		return (-1);
-	if(!(s[fd]))
-		s[fd] = ft_strnew(0);
-	if (!(ft_strchr(s[fd], '\n')))
-		s[fd] = read_line(fd, s[fd]);
-	if (num == 0 && !(ft_strlen(s[fd])))
+	if(!s)
+		s = ft_strnew(0);
+	if (!(ft_strchr(s, '\n')))
+		s = read_line(fd, s);
+	if (ft_strlen(s) == 0)
 		return (0);
-	s[fd] = ft_this(s[fd], line);
+	s = new_line(s, line);
 	return (1);
 }
