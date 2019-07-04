@@ -6,7 +6,7 @@
 /*   By: omputle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 14:56:21 by omputle           #+#    #+#             */
-/*   Updated: 2019/07/04 16:02:55 by omputle          ###   ########.fr       */
+/*   Updated: 2019/07/04 17:24:30 by omputle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -19,7 +19,7 @@ static char	*ft_strappend(char *s1, char *s2)
 	free(s1);
 	return (temp);
 }
-/*
+
 static	char	*read_line(int fd, char *s)
 {
 	int		num;
@@ -34,7 +34,7 @@ static	char	*read_line(int fd, char *s)
 	}
 	return (s);
 }
-*/
+
 
 static char	*new_line(char *s, char **line)
 {
@@ -66,16 +66,7 @@ int	get_next_line(const int fd, char **line)
 	if(!s)
 		s = ft_strnew(0);
 	if (!(ft_strchr(s, '\n')))
-		while ((num = read(fd, buff, BUFF_SIZE)) > 0)
-		{
-			if (num < 0)
-				return (-1);
-			buff[num] = '\0';
-			s = ft_strappend(s, buff);
-			ft_strclr(buff);
-			if (ft_strchr(s, '\n') != NULL)
-				break ;
-		}
+		s = read_line(fd, s);
 	if (num == 0 && ft_strlen(s) == 0)
 		return (0);
 	s = new_line(s, line);

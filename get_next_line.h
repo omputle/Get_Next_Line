@@ -6,7 +6,7 @@
 /*   By: omputle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/30 11:26:27 by omputle           #+#    #+#             */
-/*   Updated: 2019/07/04 17:19:04 by omputle          ###   ########.fr       */
+/*   Updated: 2019/07/04 17:26:32 by omputle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <sys/uio.h>
 # include <sys/wait.h>
 
-# define BUFF_SIZE 10000000
+# define BUFF_SIZE 1
 
 
 int		get_next_line(const int fd, char **line);
