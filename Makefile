@@ -1,11 +1,10 @@
 all: run
 
 run: test
-	clear
 	./test
 
-test: get_next_line.c check.txt
-	gcc -o test main.c get_next_line.c libft/libft.a
+test: main.c
+	gcc -o test main.c krillin.c libft/libft.a
 
-clean:
+fclean:
 	rm -r test

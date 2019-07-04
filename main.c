@@ -1,20 +1,23 @@
-#include <string.h>
-#include <fcntl.h>
+
 #include "get_next_line.h"
 #include <stdlib.h>
-#include "libft/libft.h"
 
-int		main(void)
+int	get_next_line(int fd, char **line);
+
+int		main(int ac, char **av)
 {
 	int		fd;
 	char	*line;
 	int		ret;
 
-	fd = open("check.txt", O_RDONLY);
-	while ((ret = get_next_line(fd, &line) > 0))
+	if (ac == 2)
 	{
-		ft_putendl(line);
-		free(line);
+		fd = open(av[1], O_RDONLY);
+		while (get_next_line(fd, &line))
+		{
+			ft_putendl(line);
+			free(line);
+		}
 	}
 	return (0);
 }
