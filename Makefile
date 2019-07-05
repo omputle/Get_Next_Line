@@ -1,7 +1,6 @@
 all: run
 
 run: test
-	clear
 	./test check.txt lorem.txt
 
 test: main.c
