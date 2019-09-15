@@ -6,7 +6,7 @@
 /*   By: omputle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 14:56:21 by omputle           #+#    #+#             */
-/*   Updated: 2019/07/05 23:20:40 by omputle          ###   ########.fr       */
+/*   Updated: 2019/07/09 10:48:45 by omputle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,19 @@ static char		*new_line(char *s, char **line)
 
 int				get_next_line(const int fd, char **line)
 {
-	static char	*s[100];
+	static char	*s;
 	int			check;
 	char		buff[BUFF_SIZE + 1];
 
 	check = read(fd, buff, 0);
 	if ((line == NULL) || fd < 0 || check == -1)
 		return (-1);
-	if (s[fd] == NULL)
-		s[fd] = ft_strnew(1);
-	if (ft_strchr(s[fd], '\n') == NULL)
-		s[fd] = read_line(fd, s[fd]);
-	if (ft_strlen(s[fd]) == 0)
+	if (s == NULL)
+		s = ft_strnew(1);
+	if (ft_strchr(s, '\n') == NULL)
+		s = read_line(fd, s);
+	if (ft_strlen(s) == 0)
 		return (0);
-	s[fd] = new_line(s[fd], line);
+	s = new_line(s, line);
 	return (1);
 }
